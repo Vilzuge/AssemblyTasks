@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int summa(int a, int b) {
+
+
+  while (b != 0) {          //loopataan kunnes jäännöstä ei enää jää operaatioiden jälkeen
+
+    int jaannos = a & b;    //katsotaan bitwise AND:illa jääkö jäännöstä
+    a = a ^ b;              //suoritetaan yhteenlasku bitwise XOR:illa (jäännökset jo tallessa)
+    b = jaannos << 1;       //jäännös bitshiftataan kerran vasemmalle, jotta sen lisääminen 'a' lukuun antaa oikean tuloksen
+  }
+
+  return a;                 //Palautetaan a, joka nyt pitää sisällään lukujen yhteenlaskun loopin jälkeen
+}
+int main(){
+    int luku1 = 7;      //plussattavat luvut
+    int luku2 = 3;      //plussattavat luvut
+
+    int uusi = summa(luku1, luku2);
+    printf("%d\n", uusi);
+}
