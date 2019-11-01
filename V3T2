@@ -1,0 +1,43 @@
+    # 99beer_skeleton.s
+    .data
+        # declare variables string "msg" and integer "i" and set their
+        # initial values
+       msg1:     .string "%d bottles of beer on the wall"
+    msg2:  .string ", %d bottles of beer, take one down, pass it around, "
+    msg3:  .string ".\n"
+
+    i:    .quad 99
+        .text
+        .global main
+main:
+    /* for elf-function call compatibility. Do not touch. */
+
+    pushq     %rbp
+
+       movq     %rsp ,%rbp
+
+       /* Program code starts here */
+
+loop: # program block label. this can now be used as a jump point.
+
+    movq    i, %rsi 
+    movq     $msg1, %rdi 
+    call     printf 
+    movq    i, %rsi 
+    movq     $msg2, %rdi 
+    call     printf 
+    decq     i 
+    movq     $msg1, %rdi 
+    movq    i, %rsi 
+    call     printf 
+    movq    $msg3, %rdi 
+    call     printf 
+    cmpq     $94, i 
+    jne     loop 
+
+    /* Program code ends here */
+    /* for compatibility. Do not touch ... */
+
+    movq    %rbp, %rsp
+    popq    %rbp
+    ret    $0
